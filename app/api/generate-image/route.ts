@@ -140,26 +140,66 @@ export async function POST(request: NextRequest) {
 
       // Generate content with Gemini
       console.log("[v0] API: Sending request to Gemini model")
-      const result = await model.generateContent(geminiPrompt)
-      const response = await result.response
-      console.log("[v0] API: Received response from Gemini")
+      
+      let result, response
+      try {
+        result = await model.generateContent(geminiPrompt)
+        response = await result.response
+        console.log("[v0] API: Received response from Gemini")
+        console.log("[v0] API: Response structure:", JSON.stringify(response, null, 2))
+      } catch (geminiError) {
+        console.error("[v0] API: Gemini generation error:", geminiError)
+        throw new Error(
+          `Gemini API error: ${
+            typeof geminiError === "object" && geminiError !== null && "message" in geminiError
+              ? (geminiError as { message?: string }).message || "Unknown error"
+              : "Unknown error"
+          }`
+        )
+      }
 
-      // Check if the response contains image data
+      // Check if the response exists and has the expected structure
+      if (!response) {
+        throw new Error("No response received from Gemini")
+      }
+
+      // Check if the response contains candidates
       const candidates = response.candidates
       if (!candidates || candidates.length === 0) {
-        throw new Error("No candidates returned from Gemini")
+        console.log("[v0] API: No candidates in response:", response)
+        throw new Error("Gemini did not return any content candidates. This might be due to content filtering or API issues.")
       }
 
       const candidate = candidates[0]
-      if (!candidate.content || !candidate.content.parts) {
-        throw new Error("No content parts in Gemini response")
+      
+      // Enhanced validation for candidate content
+      if (!candidate) {
+        throw new Error("First candidate is null or undefined")
       }
+
+      if (!candidate.content) {
+        console.log("[v0] API: No content in candidate:", candidate)
+        // Check if there's a finishReason that explains why no content was generated
+        if (candidate.finishReason) {
+          throw new Error(`Gemini stopped generation due to: ${candidate.finishReason}. This might be due to content filtering or safety concerns.`)
+        }
+        throw new Error("No content in Gemini candidate")
+      }
+
+      if (!candidate.content.parts || candidate.content.parts.length === 0) {
+        console.log("[v0] API: No content parts:", candidate.content)
+        throw new Error("No content parts in Gemini response. The model may have failed to generate the requested content.")
+      }
+
+      console.log("[v0] API: Found", candidate.content.parts.length, "content parts")
 
       // Look for image data in the response
       let imageUrl = null
       let description = ""
 
       for (const part of candidate.content.parts) {
+        console.log("[v0] API: Processing part:", Object.keys(part))
+        
         if (part.inlineData && part.inlineData.mimeType && part.inlineData.mimeType.startsWith('image/')) {
           // Convert base64 to data URL
           imageUrl = `data:${part.inlineData.mimeType};base64,${part.inlineData.data}`

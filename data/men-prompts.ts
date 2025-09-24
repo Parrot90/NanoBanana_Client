@@ -31,7 +31,7 @@ export const MEN_PROMPTS: MenItem[] = [
   {
     image: placeholders[2],
     prompt:
-      "Extreme low-angle cinematic shot of a man in the image, his skin luminous under the glow of firelight. Her hair is clean, well-maintained, and swept back naturally by the wind. He sits in the driver seat of a black vintage car engulfed in flames, fire violently consuming the hood and roof, while the driver door hangs open, and his one legs are outside the car with his feet on the asphalt.",
+      "Without changing my face or hairstyle, create an analog-style grunge photo from the year 2025. The background is in Tokyo, Japan with a supercar. I'm in the car seat, posing like a Korean model, with an aerial view of the car's interior, looking forward. I'm wearing an oversized black hoodie, baggy black jeans with ripped knees, and Nike Air Jordan low shoes. My body is shown from inside the car. The body proportion is 3/4 of the picture.",
   },
   {
     image: placeholders[0],
