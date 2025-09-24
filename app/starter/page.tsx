@@ -9,6 +9,7 @@ import { Dithering } from "@paper-design/shaders-react"
 import Link from "next/link"
 import { ApiKeySettings } from "@/components/api-key-settings"
 import { apiStorage } from "@/lib/api-storage"
+import "./welcome.css"
 
 export default function StarterPage() {
   const router = useRouter()
@@ -44,21 +45,24 @@ export default function StarterPage() {
 
       {/* Foreground content */}
       <section className="relative z-10 flex items-center justify-center min-h-dvh p-6">
-        <div className="w-full max-w-md mx-auto text-center bg-black/70 backdrop-blur-sm rounded-xl border border-border/50 p-8">
+        <div className="w-full max-w-6xl mx-auto text-center bg-black/70 backdrop-blur-sm rounded-xl border border-border/50 p-8">
           {/* Icon-like badge */}
           <div className="flex justify-center mb-6">
-            <div
-              className="size-14 rounded-2xl flex items-center justify-center"
-              style={{ backgroundColor: "#7C3AED" /* purple accent to mirror reference */ }}
-            >
-              <Sparkles className="size-6 text-white" aria-hidden="true" />
+            <div className="size-16 rounded-2xl flex items-center justify-center purple-badge">
+              <Sparkles className="size-7 text-white" aria-hidden="true" />
               <span className="sr-only">Nano Banana Starter</span>
             </div>
           </div>
 
-          <h1 className="text-2xl font-bold text-foreground text-balance">Welcome</h1>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Select a category {!hasApiKey && (
+          {/* Main Title */}
+          <div className="mb-6 px-4">
+            <h1 className="welcome-title text-white font-bold text-center leading-tight">
+              Nano Banana Prompt Library & Generator
+            </h1>
+          </div>
+
+          <p className="text-sm text-muted-foreground mb-6">
+            Select a category to get started {!hasApiKey && (
               <button
                 onClick={() => setShowApiSettings(!showApiSettings)}
                 className="text-blue-400 hover:text-blue-300 underline underline-offset-2"

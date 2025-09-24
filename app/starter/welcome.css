@@ -1,0 +1,50 @@
+/* Welcome page styles */
+.welcome-title {
+  font-size: clamp(1.2rem, 4vw, 2.8rem);
+  line-height: 1.2;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  max-width: 100%;
+  word-break: break-word;
+  text-transform: uppercase;
+  animation: fadeInUp 0.8s ease-out;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fallback for browsers that don't support background-clip */
+@supports not (-webkit-background-clip: text) {
+  .welcome-title {
+    color: #ffffff;
+    -webkit-text-fill-color: unset;
+  }
+}
+
+/* Simple fade-in animation */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover effect */
+.welcome-title:hover {
+  background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 50%, #e0e0e0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  transition: all 0.3s ease;
+}
+
+.purple-badge {
+  background-color: #7C3AED;
+}

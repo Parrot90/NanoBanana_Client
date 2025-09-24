@@ -1,6 +1,6 @@
 type MenItem = { image: string; prompt: string }
 
-const placeholders = ["/men-portrait-warm-light.jpg", "/men-portrait-studio-bw.jpg", "/men-portrait-cinematic-neon.jpg"]
+const placeholders = ["/Mens/Cafe.png", "/Mens/glasses.png", "/Mens/spotlights.png","/Mens/star.png","/Mens/cars.png"]
 
 export const MEN_PROMPTS: MenItem[] = [
   {
@@ -19,12 +19,12 @@ export const MEN_PROMPTS: MenItem[] = [
       "Prompt: moody studio portrait of the upload person, bethed in golden-orange spotlight that create glowing circular halo behind Thema on the wall. The warm light should sculpt the face and upper body with soft, sunset-like tones, while casting s strong head shadow to the right. Style the person. Her eye are closed and chin tilted slightly up",
   },
   {
-    image: placeholders[0],
+    image: placeholders[3],
     prompt:
       "A cinematic low-light portrait of a South Asian man lounging on a couch, wearing an open button silk shirt, layered necklace. He holds a cigar in one hand and a crystal glass of whiskey in the other. Warm golden light highlights the smoke around him, while the background stays dark and moody. Expression, exuding power and calm authority. Ultra photorealistic, cinematic shadows, 8K quality.",
   },
   {
-    image: placeholders[1],
+    image: placeholders[4],
     prompt:
       "With the person in image, casually leaning against a modified red supra mk4, on a quiet urban street at night. The street is wet and reflective, illuminated by neon and street lights, giving a moody, cinematic vibe. He wears a dark button-up shirt, loose blue jeans, and black Vans sneakers. The car's headlights glow. Shot from above with a dramatic angle, capturing both the car's detail and the reflective road. Inspired by Fast & Furious 2. Size 3:4. Use the face from the uploaded reference image and preserve the same facial features — do not alter the face.",
   },

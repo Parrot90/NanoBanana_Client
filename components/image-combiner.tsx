@@ -2,9 +2,9 @@
 
 import type React from "react"
 import { useState, useEffect } from "react"
-import { useSearchParams } from "next/navigation"
+import { useSearchParams, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Upload, Download, Sparkles, ImageIcon, Edit, Zap, Shuffle } from "lucide-react"
+import { Upload, Download, Sparkles, ImageIcon, Edit, Zap, Shuffle, ArrowLeft } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Dithering } from "@paper-design/shaders-react"
 import { ApiKeySettings } from "@/components/api-key-settings"
@@ -116,6 +116,7 @@ const randomPrompts = [
 
 export function ImageCombiner() {
   const searchParams = useSearchParams()
+  const router = useRouter()
   
   // Get initial mode and prompt from URL parameters
   const initialMode = (searchParams?.get('mode') as Mode) || "text-to-image"
@@ -412,9 +413,20 @@ export function ImageCombiner() {
         <div className="max-w-7xl w-full">
           <div className="bg-black/70 backdrop-blur-sm border-0 p-6 lg:p-8 rounded-xl min-h-[calc(100vh-8rem)]">
             <div className="mb-6 lg:mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-              <div>
-                <h1 className="text-xl lg:text-2xl font-bold text-white">v0 Nano Banana Starter</h1>
-                <p className="text-sm text-green-400 mt-1">Powered by Google Gemini 2.5 Flash Image Preview</p>
+              <div className="flex items-center gap-4">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => router.push('/starter')}
+                  className="text-white hover:bg-white/10 p-2"
+                  title="Back to browse prompts"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                </Button>
+                <div>
+                  <h1 className="text-xl lg:text-2xl font-bold text-white">v0 Nano Banana Starter</h1>
+                  <p className="text-sm text-green-400 mt-1">Powered by Google Gemini 2.5 Flash Image Preview</p>
+                </div>
               </div>
               <Button
                 variant="outline"
